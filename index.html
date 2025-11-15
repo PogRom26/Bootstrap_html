@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин товаров</title>
+    <!-- Подключение Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card {
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .pricing-header {
+            padding: 3rem 0;
+        }
+
+        /* Стили для бокового меню */
+        .sidebar {
+            width: 400px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        /* Сдвигаем основной контент вправо */
+        .main-content {
+            margin-left: 400px;
+            min-height: 100vh;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        /* Стили для пунктов меню */
+        .nav-item {
+            margin-bottom: 10px;
+        }
+        .nav-link {
+            color: #495057;
+            padding: 12px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Боковое меню -->
+    <div class="sidebar">
+        <h3 class="mb-4">Меню</h3>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door me-2" viewBox="0 0 16 16">
+                        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+                    </svg>
+                    Главная
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid me-2" viewBox="0 0 16 16">
+                        <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                    </svg>
+                    Категории
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart me-2" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    Заказы
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone me-2" viewBox="0 0 16 16">
+                        <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                    </svg>
+                    Контакты
+                </a>
+            </li>
+        </ul>
+
+        <!-- Дополнительный контент в боковом меню -->
+<!--        <div class="mt-5">-->
+<!--            <h5>Специальные предложения</h5>-->
+<!--            <div class="card mt-3">-->
+<!--                <div class="card-body">-->
+<!--                    <h6 class="card-title">Скидка 20%</h6>-->
+<!--                    <p class="card-text small">На все товары категории "Электроника" до конца месяца.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="card mt-3">-->
+<!--                <div class="card-body">-->
+<!--                    <h6 class="card-title">Бесплатная доставка</h6>-->
+<!--                    <p class="card-text small">При заказе от 5000 рублей.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-content">
+        <!-- Навигационная панель -->
+        <nav class="navbar navbar-expand-lg">
+        </nav>
+
+        <!-- Заголовок страницы -->
+        <div class="pricing-header bg-light text-center">
+            <div class="container">
+                <h1 class="display-4">Главная</h1>
+                <p class="lead">Вы находитесь на сайте, предназначенном для продажи товаров.</p>
+            </div>
+        </div>
+
+        <!-- Карточки товаров -->
+        <div class="container py-5">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <!-- Товар 1 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header text-center">
+                            <h4 class="my-0 fw-normal">Товар 1</h4>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h1 class="card-title pricing-card-title">$100</h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>10 пользователей включено</li>
+                                <li>2 ГБ хранилища</li>
+                                <li>Поддержка по email</li>
+                                <li>Доступ к центру помощи</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <button type="button" class="w-100 btn btn-lg btn-primary">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 2 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header text-center">
+                            <h4 class="my-0 fw-normal">Товар 2</h4>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h1 class="card-title pricing-card-title">$100</h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>10 пользователей включено</li>
+                                <li>2 ГБ хранилища</li>
+                                <li>Поддержка по email</li>
+                                <li>Доступ к центру помощи</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <button type="button" class="w-100 btn btn-lg btn-primary">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header text-center">
+                            <h4 class="my-0 fw-normal">Товар 3</h4>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h1 class="card-title pricing-card-title">$100</h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>10 пользователей включено</li>
+                                <li>2 ГБ хранилища</li>
+                                <li>Поддержка по email</li>
+                                <li>Доступ к центру помощи</li>
+                            </ul>
+                            <div class="mt-auto">
+                                <button type="button" class="w-100 btn btn-lg btn-primary">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <footer class="bg-dark text-white py-4 mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Магазин товаров</h5>
+                        <p>Лучшие товары по доступным ценам.</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Ссылки</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-white">Главная</a></li>
+                            <li><a href="#" class="text-white">О нас</a></li>
+                            <li><a href="#" class="text-white">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <h5>Контакты</h5>
+                        <ul class="list-unstyled">
+                            <li>Email: info@example.com</li>
+                            <li>Телефон: +7 (123) 456-78-90</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <p>&copy; 2023 Магазин товаров. Все права защищены.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Подключение Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
